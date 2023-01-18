@@ -11,17 +11,17 @@
 		<div id="header">
 			<h1>MySite</h1>
 			<ul>
-				<li><a href="">로그인</a><li>
-				<li><a href="">회원가입</a><li>
-				<li><a href="">회원정보수정</a><li>
-				<li><a href="">로그아웃</a><li>
+				<li><a href="<%=request.getContextPath()%>/user?a=loginform">로그인</a><li>
+				<li><a href="<%=request.getContextPath()%>/user?a=joinform">회원가입</a><li>
+				<li><a href="<%=request.getContextPath()%>/user?a=updateform">회원정보수정</a><li>
+				<li><a href="<%=request.getContextPath()%>/user?a=logout">로그아웃</a><li>
 				<li>님 안녕하세요 ^^;</li>
 			</ul>
 		</div>
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
-					<img id="profile" src="<%=request.getContextPath()%>/assets/images/po.jpg" style="width:200px">
+					<img id="profile" src="<%=request.getContextPath()%>/assets/images/zanmang.png" style="width:200px">
 					<h2>안녕하세요. 박규희의  mysite에 오신 것을 환영합니다.</h2>
 					<p>
 						이 사이트는  웹 프로그램밍 실습과제 예제 사이트입니다.<br>
