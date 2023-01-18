@@ -19,7 +19,7 @@
 						메뉴는  사이트 소개, 방명록, 게시판이 있구요.
 						Java수업 + 데이터베이스 수업 + 웹프로그래밍 수업 배운 거 있는거 없는 거 다 합쳐서
 						만들어 놓은 사이트 입니다.<br><br>
-						<a href="<%=request.getContextPath()%>/guestbook">방명록</a>에 글 남기기<br>
+						<a href="<%=request.getContextPath()%>/guestbook?a=List">방명록</a>에 글 남기기<br>
 					</p>
 				</div>
 			</div>

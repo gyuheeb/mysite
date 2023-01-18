@@ -8,13 +8,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.douzone.mysite.vo.GuestbookVo;
+import com.douzone.mysite.vo.UserVo;
 
 
-public class GuestbookDao {
+public class UserDao {
 	// FINDALL
-	public List<GuestbookVo> findAll() {
-		List<GuestbookVo> result = new ArrayList<>();
+	public List<UserVo> findAll() {
+		List<UserVo> result = new ArrayList<>();
 	
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -23,17 +23,18 @@ public class GuestbookDao {
 		try {
 			conn = getConnection();
 			
-			String sql ="select no,name,password,message,reg_date from guestbook";
+			String sql ="select * from user";
 			pstmt = conn.prepareStatement(sql);
 
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
-				GuestbookVo vo = new GuestbookVo();
+				UserVo vo = new UserVo();
 				vo.setNo(rs.getLong(1));
 				vo.setName(rs.getString(2));
-				vo.setPassword(rs.getString(3));
-				vo.setMessage(rs.getString(4));
-				vo.setReg_date(rs.getString(5));
+				vo.setEmail(rs.getString(3));
+				vo.setPassword(rs.getString(4));
+				vo.setGender(rs.getString(5));
+				vo.setJoinDate(rs.getString(6));
 				
 				result.add(vo);
 			}
@@ -62,74 +63,43 @@ public class GuestbookDao {
 	}
 	
 	//INSERT
-	public void insert(GuestbookVo vo) {
+	public void insert(UserVo vo) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		try {
 			conn = getConnection();
 			
-			String sql = "insert into guestbook values(null, ?, ?, ?, now())";
+			String sql = "insert into user values(null, ?, ?, ?, ?, now())";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, vo.getName());
-			pstmt.setString(2, vo.getPassword());
-			pstmt.setString(3, vo.getMessage());
-		
-			
-			pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
-	//DELETE
-	public void deleteByGuest(Long no,String password) {
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		
-		try {
-			conn = getConnection();
-			
-			String sql = "delete from guestbook where no = ? and password=?";
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setLong(1, no);
-			pstmt.setString(2, password);
-		
-			
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getPassword());
+			pstmt.setString(4, vo.getGender());
 
+		
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
 	private Connection getConnection() throws SQLException {
 	Connection conn = null;
 		
