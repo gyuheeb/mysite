@@ -25,7 +25,6 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>GuestbookController</display-name>
     <servlet-name>GuestbookController</servlet-name>
     <servlet-class>com.douzone.mysite.controller.GuestbookController</servlet-class>
   </servlet>
