@@ -99,7 +99,7 @@ public class UserDao {
 		}
 	}
 
-
+//LOGIN
 	public UserVo findByEmailAndPassword(UserVo vo) {
 		UserVo result =null;
 		Connection conn = null;
@@ -146,6 +146,85 @@ public class UserDao {
 				
 		return result;
 	}
+	// 회원정보 수정 FINDBYNO
+	public UserVo findByNo(Long no) {
+		UserVo result =null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		try {
+			conn = getConnection();
+			
+			String sql = "select no,name,email,password,gender from user where no = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, no);
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = new UserVo();
+				
+				result.setNo(rs.getLong(1));
+				result.setName(rs.getString(2));
+				result.setEmail(rs.getString(3));
+				result.setPassword(rs.getString(4));
+				result.setGender(rs.getString(5));
+			}
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+				
+		return result;
+	}
+	// 회원정보 수정 Update
+	public void update(UserVo vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			
+			
+			conn = getConnection();
+			
+			String sql = "update user set name = ?,  password =password(?), gender=? where no=?";
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getName());
+			pstmt.setString(2, vo.getPassword());
+			pstmt.setString(3, vo.getGender());
+			pstmt.setLong(4, vo.getNo());
+		
+			
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if(pstmt != null) {
+					pstmt.close();
+				}
+				
+				if(conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	private Connection getConnection() throws SQLException {
 	Connection conn = null;
@@ -160,6 +239,10 @@ public class UserDao {
 		
 		return conn;
 	}
+
+	
+
+	
 
 	
 }

@@ -19,8 +19,6 @@ public class LoginAction implements Action {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
-		System.out.println(email + ":" + password);
-		
 		UserVo vo = new UserVo();
 		vo.setEmail(email);
 		vo.setPassword(password);
