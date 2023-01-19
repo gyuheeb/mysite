@@ -70,7 +70,7 @@ public class UserDao {
 		try {
 			conn = getConnection();
 			
-			String sql = "insert into user values(null, ?, ?, ?, ?, now())";
+			String sql = "insert into user values(null, ?, ?, password(?), ?, now())";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, vo.getName());

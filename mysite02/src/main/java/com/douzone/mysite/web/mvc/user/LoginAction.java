@@ -6,15 +6,21 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.douzone.mysite.vo.UserVo;
 import com.douzone.web.mvc.Action;
-import com.douzone.web.util.MvcUtil;
 
-public class JoinSuccessAction implements Action {
+public class LoginAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MvcUtil.forward("user/joinsuccess", request, response);
-
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
+		System.out.println(email + ":" + password);
+		
+//		UserVo vo = new UserVo();
+//		vo.setEmail(email);
+//		vo.setPassword(password);
 	}
 
 }
