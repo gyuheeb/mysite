@@ -98,6 +98,7 @@ public class GuestbookDao {
 	
 	//DELETE
 	public void deleteByGuest(Long no,String password) {
+		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -111,7 +112,9 @@ public class GuestbookDao {
 			pstmt.setString(2, password);
 		
 			
-			pstmt.executeUpdate();
+			 pstmt.executeUpdate();
+			
+	
 		} catch (SQLException e) {
 			System.out.println("error:" + e);
 		} finally {

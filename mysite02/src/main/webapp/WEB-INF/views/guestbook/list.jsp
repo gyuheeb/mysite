@@ -18,7 +18,7 @@
 		
 		<div id="content">
 			<div id="guestbook">
-				<form action="${pageContext.request.contextPath }/guestbook?a=insert" method="post">
+				<form action="${pageContext.request.contextPath }/guestbook" method="post">
 					<input type="hidden" name="a" value="insert">
 					<table>
 						<tr>
@@ -34,26 +34,25 @@
 					</table>
 				</form>
 				<ul>
-					<c:set var="count" value="${fn:length(list) }" />
-					
-					<c:forEach items="${list }" var="vo" varStatus="status">
+				<c:set var="count" value="${fn:length(list) }" />
+				<c:forEach items="${list }" var="vo" varStatus="status" >
 					<li>
 						<table>
 							<tr>
-								<td>[${count - status.index }]</td>
+								<td>[${count - status.index}]</td>
 								<td>${vo.name }</td>
-								<td>${vo.getReg_date() }</td>
-								<td><a href="${pageContext.request.contextPath }/guestbook?a=deleteform&no="${vo.no() }>삭제</a></td>
+								<td>${vo.reg_date }</td>
+								<td><a href="${pageContext.request.contextPath }/guestbook?a=deleteform&no=${vo.no }">삭제</a></td>
 							</tr>
 							<tr>
 								<td colspan=4>
-										${fn:replace(vo.message,newline,"<br>") }
+									${fn:replace(vo.message, newline, "<br>") }
 								</td>
 							</tr>
 						</table>
-					</li>
-					</c:forEach>
 						<br>
+					</li>				
+				</c:forEach>
 				</ul>
 			</div>
 		</div>
