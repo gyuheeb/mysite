@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.douzone.mysite.web.mvc.gusetbook.GuestbookActionFactory;
 import com.douzone.mysite.web.mvc.main.MainActionFactory;
-import com.douzone.web2.mvc.Action;
-import com.douzone.web2.mvc.ActionFactory;
+import com.douzone.web.mvc.Action;
+import com.douzone.web.mvc.ActionFactory;
 
 
 public class GuestbookController extends HttpServlet {
