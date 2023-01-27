@@ -35,7 +35,7 @@
 					</tr>
 				</table>
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?a=reply">답글달기</a>
+					<a href="${pageContext.request.contextPath }/board?a=write&no=${vo.no }">답글달기</a>
 					<a href="${pageContext.request.contextPath }/board">글목록</a>
 					<a href="${pageContext.request.contextPath }/board?a=modifyform&no=${vo.no }">글수정</a>
 				</div>

@@ -15,7 +15,9 @@ public class WriteAction implements Action {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		String no = request.getParameter("no");
+		request.setAttribute("no", no);
+		System.out.println(no);
 		MvcUtil.forward("board/write", request, response);
 
 	}

@@ -30,37 +30,61 @@
 					
 					
 					<c:set var="count" value="${fn:length(list) }" />
-				
+					
 					<c:forEach items="${list }" var="vo" varStatus="status" >
+					
+				
 					</tr>	
-					<td>${vo.no}</td>	
-					<td style="text-align:left; padding-left:0px">	
-					<a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no }">${vo.title }</a>	
+					<td>${count-status.index}</td>	
+						<td style="text-align:left; padding-left:${vo.depth *20}px" >
+												<c:if test="${vo.depth > 0 }">
+							<img src="${pageContext.request.contextPath }/assets/images/reply.png">
+						
+						</c:if>
+						<a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no }">${vo.title }</a>	
+						
+
+					</td>
+					
 					</td>
 					<td>${vo.name}</td>
 					<td>${vo.hit }</td>
 					<td>${vo.reg_date }</td>
+					
+					
+					
+					<!-- 로그인 삭제 -->
+					<c:if test="${vo.user_no == authUser.no }">
 					<td><a href="${pageContext.request.contextPath }/board?a=deleteform&no=${vo.no }" class="del">삭제</a></td>
-				
+					</c:if>
+					
+					
 					</c:forEach>		
 				</table>
 				
 				<!-- pager 추가 -->
 				<div class="pager">
 					<ul>
-						<li><a href="">◀</a></li>
-						<li><a href="">1</a></li>
-						<li class="selected">2</li>
-						<li><a href="">3</a></li>
-						<li>4</li>
-						<li>5</li>
-						<li><a href="">▶</a></li>
+					<c:if test="${page>1 }">
+					<li><a href="${pageContext.request.contextPath }/board?page=${page-1 }">◀</a></li>
+					</c:if>
+						
+						<c:forEach var="i" begin="1" end="${count/10 }" step="1" >
+							<li><a href="${pageContext.request.contextPath }/board?page=${i }">i</a></li>
+						</c:forEach>
+						
+					<c:if test="${page<count/10 }">
+					<li><a href="${pageContext.request.contextPath }/board?page=${page +1}">◀</a></li>
+					</c:if>
+					
 					</ul>
-				</div>					
+				</div>	
+				
+								
 				<!-- pager 추가 -->
 								
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?a=write" id="new-book">글쓰기</a>
+					<a href="${pageContext.request.contextPath }/board?a=write&no=-1" id="new-book">글쓰기</a>
 				</div>				
 			</div>
 		</div>

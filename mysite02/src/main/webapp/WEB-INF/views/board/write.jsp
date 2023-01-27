@@ -17,6 +17,7 @@
 				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
 					<input type = "hidden" name = "a" value="writeform">
 					<input type = "hidden" name = "userNo" value="${sessionScope.authUser.no}">
+					<input type="hidden" name="no" value="${no }"> 
 					
 						<c:choose>
 								
@@ -68,6 +69,11 @@
 								</div>
 							</c:otherwise>
 					</c:choose>
+					
+    				<input type="hidden" name="o_no" value="${ param.o_no }">
+				    <input type="hidden" name="g_no" value="${ param.g_no }">
+				    <input type="hidden" name="depth" value="${ param.depth }"> 
+					
 					
 				</form>				
 			</div>
