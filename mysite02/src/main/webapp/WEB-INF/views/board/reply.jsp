@@ -63,7 +63,7 @@
 								</table>
 		
 								<div class="bottom">
-									<a href="${pageContext.request.contextPath }/board">취소</a> <input
+									<a href="${pageContext.request.contextPath }/board?page=1">취소</a> <input
 										type="submit" value="등록">
 								</div>
 							</c:otherwise>
