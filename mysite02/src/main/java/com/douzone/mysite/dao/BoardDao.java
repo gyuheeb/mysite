@@ -321,8 +321,8 @@ public class BoardDao {
 				vo.setContents(rs.getString(3));
 				vo.setHit(rs.getLong(4));
 				vo.setReg_date(rs.getString(5));
-				vo.setG_no(rs.getLong(6)+1);
-				vo.setO_no(rs.getLong(7)+1);
+				vo.setG_no(rs.getLong(6));
+				vo.setO_no(rs.getLong(7));
 				vo.setDepth(rs.getLong(8));
 				vo.setUser_no(rs.getLong(9));
 	
@@ -362,41 +362,7 @@ public class BoardDao {
 	}
 
 	
-
-//	//UPDATEO_NO
-//	public void depthinsert(BoardVo vo) {
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		
-//		try {
-//			conn = getConnection();
-//			
-//			String sql = "update board set o_no = o_no+1 where g_no=? ";
-//			pstmt = conn.prepareStatement(sql);
-//			
-//			pstmt.setString(1, vo.getO_no());
-//			pstmt.setString(2, vo.getG_no());
-//			
-//			pstmt.executeUpdate();
-//			
-//		} catch (SQLException e) {
-//			System.out.println("error:" + e);
-//		} finally {
-//			try {
-//				if(pstmt != null) {
-//					pstmt.close();
-//				}
-//				
-//				if(conn != null) {
-//					conn.close();
-//				}
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		
-//		}
-
+//----------------------------------------------------------------------------
 	private Connection getConnection() throws SQLException {
 		Connection conn = null;
 
