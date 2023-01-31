@@ -360,7 +360,66 @@ public class BoardDao {
 
 		
 	}
+	
+	//SEARCH
+	public List<BoardVo> Search(String kwd) {
+		List<BoardVo> search = new ArrayList<>();
 
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		 String sql ="select * from board where title";
+	      try {
+	    	  	conn = getConnection();
+	            if(kwd != null && !kwd.equals("") ){
+	                sql +=" LIKE '%"+ kwd.trim() +"%' order by g_no desc,o_no asc";
+	            }
+
+
+
+		
+			pstmt = conn.prepareStatement(sql);
+
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				BoardVo vo = new BoardVo();
+				vo.setNo(rs.getLong(1));
+				vo.setTitle(rs.getString(2));
+				vo.setContents(rs.getString(3));
+				vo.setHit(rs.getLong(4));
+				vo.setReg_date(rs.getString(5));
+				vo.setG_no(rs.getLong(6));
+				vo.setO_no(rs.getLong(7));
+				vo.setDepth(rs.getLong(8));
+				vo.setUser_no(rs.getLong(9));
+	
+				search.add(vo);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("error:" + e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+
+				if (pstmt != null) {
+					pstmt.close();
+				}
+
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return search;
+	
+		
+	}
 	
 //----------------------------------------------------------------------------
 	private Connection getConnection() throws SQLException {
@@ -376,5 +435,7 @@ public class BoardDao {
 
 		return conn;
 	}
+
+
 
 }

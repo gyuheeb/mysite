@@ -17,9 +17,12 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="${pageContext.request.contextPath }/board?page=1" method="post">
-					<input type="text" id="kwd" name="kwd" value=""> 
-					<input type="submit" value="찾기">
+				<form id="search_form"
+					action="${pageContext.request.contextPath }/board?page=1"
+					method="post">
+					<input type="hidden" id="keyword" name="keyword" value="${keyword }">
+					<input type="text" id="kwd" name="kwd" value="${keyword }"> <input
+						type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
 					<tr>
@@ -30,12 +33,15 @@
 						<th>작성일</th>
 						<th>&nbsp;</th>
 					</tr>
-					
-					<c:choose>
-						<c:when test="${not empty kwd}">
-							<c:set var="count" value="${fn:length(search) }" />
-							<c:forEach items="${search }" var="vo" varStatus="status">
-						<c:if test="${count-5*(page-1) >=count-status.index&&count-5*(page)+1<=count-status.index}">
+
+
+
+
+
+					<c:set var="count" value="${fn:length(list) }" />
+					<c:forEach items="${list }" var="vo" varStatus="status">
+						<c:if
+							test="${count-5*(page-1) >=count-status.index&&count-5*(page)+1<=count-status.index}">
 							<tr>
 								<td>${count-status.index}</td>
 
@@ -43,8 +49,7 @@
 									<c:if test="${vo.depth > 0 }">
 										<img
 											src="${pageContext.request.contextPath }/assets/images/reply.png">
-									</c:if> <a
-									href="${pageContext.request.contextPath }/board?a=view&no=${vo.no }">${vo.title }</a>
+									</c:if> <a href="${pageContext.request.contextPath }/board?a=view&no=${vo.no }">${vo.title }</a>
 								</td>
 
 
@@ -60,51 +65,15 @@
 										href="${pageContext.request.contextPath }/board?a=deleteform&no=${vo.no }"
 										class="del">삭제</a></td>
 								</c:if>
-					
-					</c:if>
+						</c:if>
 					</c:forEach>
-							
-						</c:when>
-						
-						<c:otherwise>
-							<c:set var="count" value="${fn:length(list) }" />
-							<c:forEach items="${list }" var="vo" varStatus="status">
-						<c:if test="${count-5*(page-1) >=count-status.index&&count-5*(page)+1<=count-status.index}">
-							<tr>
-								<td>${count-status.index}</td>
-
-								<td style="text-align:left; padding-left:${vo.depth *20}px">
-									<c:if test="${vo.depth > 0 }">
-										<img
-											src="${pageContext.request.contextPath }/assets/images/reply.png">
-									</c:if> <a
-									href="${pageContext.request.contextPath }/board?a=view&no=${vo.no }">${vo.title }</a>
-								</td>
-
-
-								<td>${vo.name}</td>
-								<td>${vo.hit }</td>
-								<td>${vo.reg_date }</td>
 
 
 
-								<!-- 로그인 삭제 -->
-								<c:if test="${vo.user_no == authUser.no }">
-									<td><a
-										href="${pageContext.request.contextPath }/board?a=deleteform&no=${vo.no }"
-										class="del">삭제</a></td>
-								</c:if>
-					
-					</c:if>
-					</c:forEach>
-							
-						</c:otherwise>
-					
-					</c:choose>
-						
-						<!-- <c:set var="count" value="${fn:length(list) }" /> -->
-						
-						
+
+					<!-- <c:set var="count" value="${fn:length(list) }" /> -->
+
+
 				</table>
 
 				<!-- pager 추가 -->
@@ -113,17 +82,17 @@
 					<ul>
 						<c:if test="${page>1 }">
 							<li><a
-								href="${pageContext.request.contextPath }/board?page=${page-1 }">◀</a></li>
+								href="${pageContext.request.contextPath }/board?page=${page-1 }&kwd=${keyword }">◀</a></li>
 						</c:if>
 
 						<c:forEach var="i" begin="1" end="${count/5+1 }" step="1">
 							<li><a
-								href="${pageContext.request.contextPath }/board?page=${i }">${i }</a></li>
+								href="${pageContext.request.contextPath }/board?page=${i }&kwd=${keyword }">${i }</a></li>
 						</c:forEach>
 
 						<c:if test="${page < count/5 }">
 							<li><a
-								href="${pageContext.request.contextPath }/board?page=${page +1}">▶</a></li>
+								href="${pageContext.request.contextPath }/board?page=${page +1}&kwd=${keyword }">▶</a></li>
 						</c:if>
 
 					</ul>
