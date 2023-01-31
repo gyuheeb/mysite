@@ -20,7 +20,6 @@
 				<form id="search_form"
 					action="${pageContext.request.contextPath }/board?page=1"
 					method="post">
-					<input type="hidden" id="keyword" name="keyword" value="${keyword }">
 					<input type="text" id="kwd" name="kwd" value="${keyword }"> <input
 						type="submit" value="찾기">
 				</form>
