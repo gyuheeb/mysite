@@ -29,6 +29,9 @@ public class BoardRepository {
 	
 	
 	}
+	public int getTotalCount(String keyword) {
+		sqlSession.selectOne("board.getTotalCount",keyword);
+	}
 
 	// FINDALL
 	public List<BoardVo> findAll() {

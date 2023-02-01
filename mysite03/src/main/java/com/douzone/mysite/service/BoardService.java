@@ -31,7 +31,9 @@ public class BoardService {
 		
 	}
 	public Map<String, Object> getContentsList(int page, String keyword) {
-//		int toTalCount = boardRepository.getTotalCount(Keyword);
+		int toTalCount = boardrepository.getTotalCount(Keyword);
+
+		
 		//1. view에서 게시판 리스트를 랜더링 하기 위한 데이터 값 계산
 		int beginPage = 0;
 		int prevPage = 0;
