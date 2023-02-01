@@ -34,7 +34,10 @@ public class GuestbookContoller {
 	
 	@RequestMapping(value="/list", method=RequestMethod.POST)
 	public String list(GuestbookVo vo) {
+		System.out.println(vo);
 		guestbookService.addMessage(vo);
+		System.out.println(vo);
+		
 		return "redirect:/guestbook";
 	}
 	
