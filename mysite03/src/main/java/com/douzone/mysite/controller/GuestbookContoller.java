@@ -28,6 +28,7 @@ public class GuestbookContoller {
 		List<GuestbookVo> guestbooklist = guestbookService.getMessageList();
 		
 		model.addAttribute("guestbooklist", guestbooklist);
+		
 		return "guestbook/list";
 	}
 	
