@@ -42,7 +42,7 @@
 						<c:if
 							test="${count-5*(page-1) >=count-status.index&&count-5*(page)+1<=count-status.index}">
 							<tr>
-								<td>${count-status.index}</td>
+								<td>${count - status.index}</td>
 
 								<td style="text-align:left; padding-left:${vo.depth *20}px">
 									<c:if test="${vo.depth > 0 }">

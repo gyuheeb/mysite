@@ -5,62 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import com.douzone.mysite.vo.UserVo;
 
 
 public class UserDao {
-	// FINDALL
-	public List<UserVo> findAll() {
-		List<UserVo> result = new ArrayList<>();
-	
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = getConnection();
-			
-			String sql ="select * from user";
-			pstmt = conn.prepareStatement(sql);
-
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				UserVo vo = new UserVo();
-				vo.setNo(rs.getLong(1));
-				vo.setName(rs.getString(2));
-				vo.setEmail(rs.getString(3));
-				vo.setPassword(rs.getString(4));
-				vo.setGender(rs.getString(5));
-				vo.setJoinDate(rs.getString(6));
-				
-				result.add(vo);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("error:" + e);
-		} finally {
-			try {
-				if(rs != null) {
-					rs.close();
-				}
-				
-				if(pstmt != null) {
-					pstmt.close();
-				}
-				
-				if(conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		return result;
-	}
 	
 	//INSERT
 	public void insert(UserVo vo) {

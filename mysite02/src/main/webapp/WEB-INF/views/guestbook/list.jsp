@@ -39,7 +39,7 @@
 					<li>
 						<table>
 							<tr>
-								<td>[${vo.no}]</td>
+								<td>[${count - status.index}]</td>
 								<td>${vo.name }</td>
 								<td>${vo.reg_date }</td>
 								<td><a href="${pageContext.request.contextPath }/guestbook?a=deleteform&no=${vo.no }">삭제</a></td>
