@@ -1,7 +1,10 @@
 package com.douzone.mysite.repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,13 +19,23 @@ public class BoardRepository {
 	// FINDALL
 	public List<BoardVo> findAll() {
 		return sqlSession.selectList("board.findAll");
-
 	}
-	
-	//SEARCH
+	// FINDNO
+	public BoardVo getContents(Long no) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("no", no);
+		return sqlSession.selectOne("board.getContents", map);
+	}
+
+	// SEARCH
 	public List<BoardVo> Search(String keyword) {
 		List<BoardVo> search = new ArrayList<>();
 		return search;
+	}
+	
+	public int getTotalCount(int page, String keyword) {
+		return sqlSession.selectOne("board.getTotalCount",keyword);
+		 
 	}
 	
 //	// INSERT
@@ -42,14 +55,8 @@ public class BoardRepository {
 ////	
 ////	
 ////	}
-	public int getTotalCount(int page, String keyword) {
-		return sqlSession.selectOne("board.getTotalCount",keyword);
-		 
-	}
-	// FINDNO
-	public BoardVo findNo(Long no) {
-		return sqlSession.selectOne("no",no);
-	}
+	
+
 //
 //	// FINDMAXNO
 //	public Long findMax() {

@@ -26,18 +26,18 @@ public class BoardService {
 		return boardrepository.findAll();
 	}
 	
-//	public Map<String, Object> getContentsList(int page, String keyword) {
-//		int TotalCount = boardrepository.getTotalCount(page,keyword);
-//		Map<String,Object> map =new HashMap<>();
-//		return map;
-//
-//	}
+	public Map<String, Object> getContentsList(int page, String keyword) {
+		int TotalCount = boardrepository.getTotalCount(page,keyword);
+		Map<String,Object> map =new HashMap<>();
+		return map;
+
+	}
 	
 //	public void addContents(BoardVo vo) {
-//	
+//		return boardrepository.getContents(vo);
 //	}
 	public BoardVo getContents(Long no) {
-		return boardrepository.findNo(no);
+		return boardrepository.getContents(no);
 	}
 //	public BoardVo getContents(Long no,Long userNo) {
 //		

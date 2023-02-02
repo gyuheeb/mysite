@@ -10,9 +10,10 @@
 	]]>
 	</select>
 	
-	<select id="findNo"  parameterType="Long">
+	<select id="getContents"  parameterType="Long" resultType="boardvo">
 	<![CDATA[
-		select * from board where no=#{no}
+		select a.no,a.title,a.contents,a.hit,a.reg_date,a.g_no,a.o_no,a.depth,a.user_no,b.name 
+		from board a,user b where a.user_no=b.no and b.no=#{no}
 	]]>
 	</select>
 	
