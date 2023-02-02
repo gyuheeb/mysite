@@ -13,9 +13,15 @@
 	<select id="getContents"  parameterType="Long" resultType="boardvo">
 	<![CDATA[
 		select a.no,a.title,a.contents,a.hit,a.reg_date,a.g_no,a.o_no,a.depth,a.user_no,b.name 
-		from board a,user b where a.user_no=b.no and b.no=#{no}
+		from board a,user b where a.user_no=b.no and a.no=#{no}
 	]]>
 	</select>
+	
+	<insert id="insert" parameterType="boardvo">
+	<![CDATA[
+		insert into board(no,title,contents,reg_date,g_no,o_no,depth,user_no) values(null,#{title }, #{contents }, now(),#{g_no },#{o_no },#{depth },#{user_no })
+	]]>
+	</insert>
 	
 <!-- 
 
@@ -29,10 +35,7 @@
 		]]>
 	</select>
 
-	<insert id="insert" parameterType="boardvo">
-	<![CDATA[
-		insert into board(no,title,contents,reg_date,g_no,o_no,depth,user_no) values(null,#{title }, #{contents }, now(),#{g_no },#{o_no },#{depth },#{user_no })
-	]]>
+	
 	
 	<selectKey keyProperty="no" resultType="Long" order="AFTER">
 		<![CDATA[

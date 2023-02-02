@@ -46,7 +46,13 @@
 				  <artifactId>spring-jcl</artifactId>
 			   </exclusion>
 			</exclusions>
-		</dependency>
+	</dependency>
+		<!-- spring aspect -->
+		<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>${org.springframework-version}</version>
+			</dependency>
 
 	<!-- Logback --> 
 		<dependency>                                    
