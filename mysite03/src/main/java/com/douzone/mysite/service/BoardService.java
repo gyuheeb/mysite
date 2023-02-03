@@ -11,9 +11,6 @@ import org.springframework.stereotype.Service;
 import com.douzone.mysite.repository.BoardRepository;
 import com.douzone.mysite.vo.BoardVo;
 
-
-
-
 @Service
 public class BoardService {
 	private static final int LIST_SIZE= 5; //리스팅되는 게시물의 수
@@ -21,59 +18,74 @@ public class BoardService {
 	
 	@Autowired
 	private BoardRepository boardrepository;
-	
+	//LIST
 	public List<BoardVo> list() {
 		return boardrepository.findAll();
 	}
-	
-	public Map<String, Object> getContentsList(int page, String keyword) {
-		int TotalCount = boardrepository.getTotalCount(page,keyword);
-		Map<String,Object> map =new HashMap<>();
-		return map;
-
-	}
-	
-//	public void addContents(BoardVo vo) {
-//		return boardrepository.getContents(vo);
-//	}
+	//VIEW
 	public BoardVo getContents(Long no) {
 		return boardrepository.getContents(no);
 	}
-//	public BoardVo getContents(Long no,Long userNo) {
-//		
-//		return null;
-//	}
-//	public void upadateContents(BoardVo vo) {
-//		
-//	}
-//	public void deleteContents(Long no,Long userNo) {
-//		
-//	}
+	//UPDATE
+	public void upadateContents(BoardVo vo) {
+		boardrepository.upadateContents(vo);
+	}
+	//DETETE
+	public void deleteContents(Long no) {
+		boardrepository.deleteContents(no);
+	}
 	
-//
-//		
-//		//1. view에서 게시판 리스트를 랜더링 하기 위한 데이터 값 계산
-//		int beginPage = 0;
-//		int prevPage = 0;
-//		int nextPage = 0;
-//		int endPage = 0;
-//	
-//		//2.리스트 가져오기
-//		List<BoardVo> list =  boardrepository.findAllByPageAndKeyWord(page, keyword);
-//		
-//		
-//		//3.리스트 정보를 맵에 저장
-//		Map<String,Object> map =new HashMap<>();
-//		map.put("list", list);
-//		map.put("beginPage", beginPage);
-//		map.put("prevPage", prevPage);
-//		map.put("endPage", endPage);
-//		
-//		
-//		return map;
-//	}
+	public void addContents(BoardVo vo) {
+	
+		boardrepository.addContents(vo);
+	}
+	
+	public Long findMax() {
+		return  boardrepository.findMax();
+	}
+	public void updateCount(Long g_no,Long o_no) {
+		 boardrepository.updateCount(g_no,o_no);
+	}
+	
+	public void viewCount(Long no) {
+		 boardrepository.viewCount(no);
+	}
+	
 
+	//PAGELIST
+	public Map<String, Object> getContentsList(int page, String keyword) {
+			Map<String,Object> map =new HashMap<>();
 
+			int TotalCount = boardrepository.getTotalCount(keyword);
+			
+			int block = page/LIST_SIZE +1;
+			int totalPage =TotalCount%LIST_SIZE == 0 ? TotalCount/block : (int)(TotalCount/block)+1;
+			int endPage = block*LIST_SIZE > TotalCount ? -1 : block*LIST_SIZE ;  
+			int startPage =(block*LIST_SIZE)-4;  
+			int prevPage = page <1? -1: page-1;	
+			int nextPage = page > totalPage ?-1: page+1;
+							
+			
+			//끝페이지
+			
+			//2.리스트 가져오기
+			List<BoardVo> list = boardrepository.findAllByPageAndKeyword(page, keyword, LIST_SIZE);
+			
+			//3.리스트 정보를 맵에 저장
+		
+			map.put("list", list);
+			map.put("keyword", keyword);
+			map.put("block", block);
+			map.put("totalPage", totalPage);
+			map.put("endPage", endPage);
+			map.put("startPage", startPage);
+			map.put("prevPage", prevPage);
+			map.put("nextPage", nextPage);
+			
+			
+			return map;
+		}
+	
 	
 	
 

@@ -18,7 +18,7 @@
 		<div id="content">
 			<div id="board">
 				<form id="search_form"
-					action="${pageContext.request.contextPath }/board?page=1"
+					action="${pageContext.request.contextPath }/board/page=${map.page}&kwd=${map.keyword}"
 					method="post">
 					<input type="text" id="kwd" name="kwd" value="${keyword }"> <input
 						type="submit" value="찾기">
@@ -61,7 +61,7 @@
 								<!-- 로그인 삭제 -->
 								<c:if test="${vo.user_no == authUser.no }">
 									<td><a
-										href="${pageContext.request.contextPath }/board?a=deleteform&no=${vo.no }"
+										href="${pageContext.request.contextPath }/board/delete/${vo.no}"
 										class="del">삭제</a></td>
 								</c:if>
 						
@@ -79,19 +79,19 @@
 
 				<div class="pager">
 					<ul>
-						<c:if test="${page>1}">
+						<c:if test="${map.prevPage>1}">
 							<li><a
-								href="${pageContext.request.contextPath }/board?page=${page-1 }&kwd=${keyword }">◀</a></li>
+								href="${pageContext.request.contextPath }/board/page=${map.prevPage }&kwd=${map.keyword }">◀</a></li>
 						</c:if>
 
-						<c:forEach var="i" begin="1" end="${count/5+1 }" step="1">
+						<c:forEach var="i" begin="${map.startPage }" end="${map.endPage }" step="1">
 							<li><a
-								href="${pageContext.request.contextPath }/board?page=${i }&kwd=${keyword }">${i }</a></li>
+								href="${pageContext.request.contextPath }/board/page=${i }&kwd=${map.keyword }">${i }</a></li>
 						</c:forEach>
 
-						<c:if test="${page < count/5 }">
+						<c:if test="${map.nextPage < map.endPage }">
 							<li><a
-								href="${pageContext.request.contextPath }/board?page=${page +1}&kwd=${keyword }">▶</a></li>
+								href="${pageContext.request.contextPath }/board/page=${map.nextPage }&kwd=${map.keyword }">▶</a></li>
 						</c:if>
 
 					</ul>
@@ -101,7 +101,7 @@
 				<!-- pager 추가 -->
 
 				<div class="bottom">
-					<a href="${pageContext.request.contextPath }/board?a=write&no=-1"
+					<a href="${pageContext.request.contextPath }/board/write/-1"
 						id="new-book">글쓰기</a>
 				</div>
 			</div>

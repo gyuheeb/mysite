@@ -2,30 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="board">
-	
+
+	<!-- 전체 보기 -->
 	<select id="findAll" resultType="boardvo">
 	<![CDATA[
 		select a.no,a.title,a.contents,a.hit,a.reg_date,a.g_no,a.o_no,a.depth,a.user_no,b.name 
 		from board a,user b where a.user_no=b.no order by g_no desc,o_no asc
 	]]>
 	</select>
-	
+	<!-- 전체 보기 -->
 	<select id="getContents"  parameterType="Long" resultType="boardvo">
 	<![CDATA[
 		select a.no,a.title,a.contents,a.hit,a.reg_date,a.g_no,a.o_no,a.depth,a.user_no,b.name 
 		from board a,user b where a.user_no=b.no and a.no=#{no}
 	]]>
 	</select>
-	
-	<insert id="insert" parameterType="boardvo">
+	<!-- 수정하기 -->
+	<update id="upadateContents" parameterType="boardvo">
 	<![CDATA[
-		insert into board(no,title,contents,reg_date,g_no,o_no,depth,user_no) values(null,#{title }, #{contents }, now(),#{g_no },#{o_no },#{depth },#{user_no })
+			update board set title=#{title}, contents=#{contents} where no =#{no}
+		]]>
+		
+	</update>
+	<!-- 글쓰기 -->
+	<insert id="addContents" parameterType="boardvo">
+	<![CDATA[
+		insert into board(no,title,contents,reg_date,g_no,o_no,depth,user_no) 
+		values(null,#{title }, #{contents }, now(),#{g_no },#{o_no},#{depth},#{user_no })
 	]]>
+	<selectKey keyProperty="no" resultType="Long" order="AFTER">
+		<![CDATA[
+			select last_insert_id()
+			]]>
+	</selectKey>
 	</insert>
+	<!-- 삭제 -->
+	<delete id="deleteContents" parameterType="Long">
+	<![CDATA[
+		delete from board where no = #{no}
+	]]>
+	</delete>
+	<!-- 그룹 NO MAX -->
+	<select id="findMax"  resultType="long">
+	<![CDATA[
+		select ifnull(max(g_no),0) from board
+	]]>
+	</select>
+	<!-- g_NO o_NO 업데이트 -->
+	<select id="selectupdateCount" parameterType="Long" resultType="boardvo">
+	<![CDATA[
+			select * from board  where g_no =#{g_no} and o_no > #{o_no}
+		]]>
+	</select>
 	
-<!-- 
-
-	<select id="findAllByPageAndKeyword" parameterType="map">
+	<update id="updateCount" parameterType="Long">
+	<![CDATA[
+			update board set o_no =#{o_no} where no=#{no}	
+			]]>
+	</update>
+	
+	<!-- 페이징 리스트 -->
+	<select id="findAllByPageAndKeyword" parameterType="map" resultType="boardvo">
 		<![CDATA[
 		select *
 		  from board
@@ -34,58 +71,47 @@
 		 limit #{startOffset }, #{size }    
 		]]>
 	</select>
-
-	
-	
-	<selectKey keyProperty="no" resultType="Long" order="AFTER">
-		<![CDATA[
-			select last_insert_id()
-			]]>
-	</selectKey>
-	</insert>
- -->
- 
-	
-
-
-
-
-
-
-
-
-	<select id="findAllByPageAndKeyWord" parameterType="map">
-	<choose>
-		<when test="keyword== null || keyword ==''">
+	<!-- TotalCount -->
+	<select id="getTotalCount" parameterType="string" resultType="Integer">
+		<choose>
+			<when test='_parameter == null or _parameter ==""'>
+				<![CDATA[
+				select count(*)
+				  from board
+				]]>
+			</when>
+			<otherwise>
+				<![CDATA[
+				select count(*)
+				  from board
+				 where title like '%${_parameter }%'
+				    or contents like '%${_parameter }%'
+				]]>
+			</otherwise>
+		</choose>
 		
-		</when>
-		<otherwise>
-		
-		</otherwise>
-	</choose>
-	<![CDATA[
-		select * from board where title like '%${keyword }%' or contents like '%${keyword }%'
-		limit #{startOffset},#{size}
-		
-	]]>
 	</select>
 	
-	<select id="getTotalCount" parameterType="string" resultType="integer">
+	<!-- 조회수 -->
+	<update id="viewCount" parameterType="Long">
+		<![CDATA[
+		update board set hit = hit+1 where no = #{no}
+		]]>
+	</update>
+</mapper>
+
+
 	
-	<choose>
-		<when test='_parameter == null or _parameter==""'>
-			<![CDATA[
-				select count(*) from board  
-			]]>
-		
-		</when>
-		<otherwise>
-			<![CDATA[
-				select count(*) from board where title like '%${keyword }%' or contents like '%${keyword }%'
-			]]>
-		</otherwise>
-		</choose>
-		</select>
+	
 	
 
-	</mapper>
+
+
+
+
+
+
+
+
+
+
