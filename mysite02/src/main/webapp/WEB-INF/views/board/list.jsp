@@ -83,12 +83,23 @@
 							<li><a
 								href="${pageContext.request.contextPath }/board?page=${page-1 }&kwd=${keyword }">◀</a></li>
 						</c:if>
-
-						<c:forEach var="i" begin="1" end="${count/5+1 }" step="1">
-							<li><a
-								href="${pageContext.request.contextPath }/board?page=${i }&kwd=${keyword }">${i }</a></li>
-						</c:forEach>
-
+						
+						<c:choose>
+							<c:when test="${count%5 == 0 }">
+								<c:forEach var="i" begin="1" end="${count/5}" step="1">
+								<li><a
+									href="${pageContext.request.contextPath }/board?page=${i }&kwd=${keyword }">${i }</a></li>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="i" begin="1" end="${count/5+1 }" step="1">
+								<li><a
+									href="${pageContext.request.contextPath }/board?page=${i }&kwd=${keyword }">${i }</a></li>
+								</c:forEach>
+							</c:otherwise>
+						
+						</c:choose>
+					
 						<c:if test="${page < count/5 }">
 							<li><a
 								href="${pageContext.request.contextPath }/board?page=${page +1}&kwd=${keyword }">▶</a></li>
