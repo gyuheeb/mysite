@@ -14,10 +14,8 @@
 	<c:import url="/WEB-INF/views/includes/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
-					<input type = "hidden" name = "a" value="writeform">
-					<input type = "hidden" name = "userNo" value="${sessionScope.authUser.no}">
-					<input type="hidden" name="no" value="${no }"> 
+				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board/write/${no}">
+				
 					
 						<c:choose>
 								
@@ -39,7 +37,7 @@
 								</table>
 			
 								<div class="bottom">
-									<a href="${pageContext.request.contextPath }/board?page=1">취소</a>
+									<a href="${pageContext.request.contextPath }/board/view">취소</a>
 									 <input type="hidden" value="등록">
 								</div>
 							</c:when>
@@ -58,7 +56,7 @@
 		
 								<tr>
 									<td class="label">내용</td>
-									<td><textarea id="content" name="content"></textarea></td>
+									<td><textarea id="content" name="contents"></textarea></td>
 								</tr>
 							
 								</table>
@@ -70,9 +68,10 @@
 							</c:otherwise>
 					</c:choose>
 					
-    				<input type="hidden" name="o_no" value="${ param.o_no }">
-				    <input type="hidden" name="g_no" value="${ param.g_no }">
-				    <input type="hidden" name="depth" value="${ param.depth }"> 
+    				<input type="hidden" name="o_no" value="${ vo.o_no }">
+				    <input type="hidden" name="g_no" value="${ vo.g_no }">
+				    <input type="hidden" name="depth" value="${ vo.depth }"> 
+				    <input type="hidden" name="no" value="${ vo.no }"> 
 					
 					
 				</form>				
