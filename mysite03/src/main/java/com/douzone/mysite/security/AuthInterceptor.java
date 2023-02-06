@@ -28,7 +28,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 		
 		
 		//4. handler method에 @Auth가 없으면 Type(Class)에 붙어 있는지 확인한다.
-			
+		if(auth ==null) {
+		auth = handlerMethod.getMethod().getDeclaringClass().getAnnotation(Auth.class);	
+		}
+		
 		//5.Type이나 Method에 @Auth가 없는 경우 
 		if(auth == null) {
 			return true;
@@ -44,7 +47,15 @@ public class AuthInterceptor implements HandlerInterceptor {
 		}
 		//7. 권한(Authorization) 체크를 위해 @Auth의 role 가져오기("Admin","user")
 		String role = auth.role();
-		//String authUserRole = authUser.getRole();
+		
+		if("ADMIN".equals(role)) {
+			if("관리자".equals(authUser.getName()) == false) {
+			response.sendRedirect(request.getContextPath());
+			return false;
+			
+			}
+		}
+//		String authUserRole = authUser.getRole();
 		
 		//7. 인증 확인
 		return true;

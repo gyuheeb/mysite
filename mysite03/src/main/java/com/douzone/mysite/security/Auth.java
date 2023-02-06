@@ -10,6 +10,7 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target({METHOD,TYPE})
 public @interface Auth {
+	
 //	public String value() default "USER";
 	public String role() default "USER"; //@Auth(role = "USER")
 	public boolean test()  default false;  //@Auth(test = false)
