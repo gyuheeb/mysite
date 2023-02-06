@@ -1,6 +1,5 @@
 package com.douzone.mysite.controller;
 
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
