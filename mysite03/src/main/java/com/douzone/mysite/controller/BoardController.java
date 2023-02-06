@@ -17,8 +17,7 @@ import com.douzone.mysite.security.Auth;
 import com.douzone.mysite.service.BoardService;
 import com.douzone.mysite.vo.BoardVo;
 import com.douzone.mysite.vo.UserVo;
-import com.douzone.mysite.web.util.WebUtil;
-
+import com.douzone.web.util.WebUtil;
 
 @Controller
 @RequestMapping("/board")
@@ -34,7 +33,7 @@ public class BoardController {
 		
 		Map<String, Object> map = boardService.getContentsList(page, keyword);
 
-		//model.addAllAttributes(map);
+		// model.addAllAttributes(map);
 		model.addAttribute("map", map);
 		model.addAttribute("keyword", keyword);
 		
@@ -105,6 +104,7 @@ public class BoardController {
 				"?p=" + page + 
 				"&kwd=" + WebUtil.encodeURL( keyword, "UTF-8" );
 	}
+
 	@Auth
 	@RequestMapping(value="/write", method=RequestMethod.GET)	
 	public String write() {

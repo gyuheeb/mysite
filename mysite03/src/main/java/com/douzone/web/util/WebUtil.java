@@ -1,4 +1,4 @@
-package com.douzone.mysite.web.util;
+package com.douzone.web.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

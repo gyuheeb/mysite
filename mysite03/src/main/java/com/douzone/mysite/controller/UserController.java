@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.douzone.mysite.security.Auth;
 import com.douzone.mysite.service.UserService;
 import com.douzone.mysite.vo.UserVo;
 
@@ -51,6 +52,7 @@ public class UserController {
 		return "user/login";
 	}
 	
+	@Auth
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(HttpSession session, UserVo vo, Model model){
 		UserVo authUser = userService.getUser(vo);
@@ -70,19 +72,15 @@ public class UserController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.GET)
-	public String update(HttpSession session ,Model model) {
-		//Access Control
-		 UserVo authUser = (UserVo)session.getAttribute("authUser");
-		 if(authUser ==null) {
-			 return "redirect:/";
-		 }
-		/////////////////////ss제엍ㄴ?///////////////////////////
-
-		 UserVo userVo=userService.getUser(authUser.getNo());
-		 model.addAttribute("userVo", userVo);
-		return"user/update";
-	}
+//	@Auth
+//	@RequestMapping(value="/update", method=RequestMethod.GET)
+//	public String update(@AuthUser UserVo authUser,Model model) {
+//		//Access Control
+//		 UserVo userVo = userService.getUser(authUser.getNo());
+//		model.addAttribute("userVo",userVo);
+//		return "user/update";
+//		
+//	}
 	@RequestMapping(value="/update", method=RequestMethod.POST)
 	public String update(HttpSession session ,UserVo vo) {
 		//Access Control
