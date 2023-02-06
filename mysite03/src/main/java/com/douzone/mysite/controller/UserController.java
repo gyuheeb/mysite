@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.douzone.mysite.security.Auth;
+import com.douzone.mysite.security.AuthUser;
 import com.douzone.mysite.service.UserService;
 import com.douzone.mysite.vo.UserVo;
 
@@ -47,48 +48,25 @@ public class UserController {
 	}
 	
 
-	@RequestMapping(value="/login", method=RequestMethod.GET)
+	
+	@RequestMapping(value="/login")
 	public String login() {
 		return "user/login";
 	}
 	
 	@Auth
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String login(HttpSession session, UserVo vo, Model model){
-		UserVo authUser = userService.getUser(vo);
+	@RequestMapping(value="/update", method=RequestMethod.GET)
+	public String update(@AuthUser UserVo authUser,Model model) {
 		
-		if(authUser == null) {
-			model.addAttribute("email",vo.getEmail());
-			return"user/login"; //다시 로그인페이지
-		}
-		session.setAttribute("authUser", authUser);
-		return "redirect:/";   //main으로...
+		 UserVo userVo = userService.getUser(authUser.getNo());
+		model.addAttribute("userVo",userVo);
+		return "user/update";
+		
 	}
 	
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
-		session.removeAttribute("authUser");
-		session.invalidate();
-		return "redirect:/";
-	}
-	
-//	@Auth
-//	@RequestMapping(value="/update", method=RequestMethod.GET)
-//	public String update(@AuthUser UserVo authUser,Model model) {
-//		//Access Control
-//		 UserVo userVo = userService.getUser(authUser.getNo());
-//		model.addAttribute("userVo",userVo);
-//		return "user/update";
-//		
-//	}
+	@Auth
 	@RequestMapping(value="/update", method=RequestMethod.POST)
-	public String update(HttpSession session ,UserVo vo) {
-		//Access Control
-		 UserVo authUser = (UserVo)session.getAttribute("authUser");
-		 if(authUser ==null) {
-			 return "redirect:/";
-		 }
-		/////////////////////ss제엍ㄴ?///////////////////////////
+	public String update(@AuthUser UserVo authUser,UserVo vo) {
 		vo.setNo(authUser.getNo());
 		userService.updateUser(vo);
 		
