@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.douzone.mysite.security.Auth;
+
 import com.douzone.mysite.service.SiteService;
 import com.douzone.mysite.vo.SiteVo;
+
 
 
 
@@ -29,10 +33,10 @@ public class AdminController {
 		model.addAttribute("siteVo",vo);
 		return "admin/main";
 	}
-	@RequestMapping("/main/update")
+	@RequestMapping(value ="/main/update", method=RequestMethod.POST)
 	public String update(SiteVo vo) {
-		//siteService.updateSite(vo); 
-		return "redirect:/admin";
+		siteService.updateSite(vo);
+		return "redirect:/admin/update";
 	}
 	
 	
