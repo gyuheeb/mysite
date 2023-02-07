@@ -14,5 +14,8 @@ public class SiteRepository {
 	public SiteVo find() {
 		return sqlSession.selectOne("site.find");
 	}
+	public void update() {
+		sqlSession.selectOne("site.update");
+	}
 
 }

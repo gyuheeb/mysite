@@ -46,7 +46,21 @@
 				  <artifactId>spring-jcl</artifactId>
 			   </exclusion>
 			</exclusions>
-	</dependency>
+		</dependency>
+		
+		<!-- file Upload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		
 		<!-- spring aspect -->
 		<dependency>
 				<groupId>org.springframework</groupId>

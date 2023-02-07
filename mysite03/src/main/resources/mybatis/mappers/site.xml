@@ -8,4 +8,10 @@
 		]]>		
 	</select>
 	
+		<update id="update" parameterType="sitevo">
+		<![CDATA[
+			update site set title=#{vo.title}, welcome=#{welcome}, description=#{description }
+		]]>		
+	</update>
+	
 </mapper>
