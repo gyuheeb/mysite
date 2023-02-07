@@ -50,14 +50,14 @@ public class AuthInterceptor implements HandlerInterceptor {
 		if("USER".equals(role)) {
 			return true;
 		}
-		
+		// @Auth이 ADMIN인 경우 , role 도 admin이어야 가능 ...
 		if(!"ADMIN".equals( authUser.getRole())) {	
 			response.sendRedirect(request.getContextPath());
 			return false;
 		}
 		//		String authUserRole = authUser.getRole();
 		
-		//7. 인증 확인
+		//8. 인증 확인
 		return true;
 	}
 
