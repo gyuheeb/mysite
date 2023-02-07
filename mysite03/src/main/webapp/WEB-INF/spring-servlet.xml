@@ -65,6 +65,13 @@
 			<mvc:exclude-mapping path="/assets/**"/>
 			<bean class="com.douzone.mysite.security.AuthInterceptor" />
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<mvc:exclude-mapping path="/user/auth"/>
+			<mvc:exclude-mapping path="/user/logout"/>
+			<mvc:exclude-mapping path="/assets/**"/>
+			<bean class="com.douzone.mysite.security.mysiteInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<!-- ViewResolver -->
