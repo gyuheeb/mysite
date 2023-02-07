@@ -14,7 +14,7 @@ import com.douzone.mysite.exception.FileuploadServiceException;
 @Service
 public class FileuploadService {
 	private static String SAVE_PATH = "/mysite-uploads";
-	private static String URL_PATH = "/assets/upload-images/";
+	private static String URL_PATH = "/assets/upload-images";
 	
 	public String restore(MultipartFile file) {
 		String url = null;
