@@ -70,7 +70,7 @@
 			<mvc:exclude-mapping path="/user/auth"/>
 			<mvc:exclude-mapping path="/user/logout"/>
 			<mvc:exclude-mapping path="/assets/**"/>
-			<bean class="com.douzone.mysite.security.mysiteInterceptor" />
+			<bean class="com.douzone.mysite.interceptor.mysiteInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

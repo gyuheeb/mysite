@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>${site.title }</title>
+<title>${sitevo.title }</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link href="${pageContext.request.contextPath }/assets/css/main.css" rel="stylesheet" type="text/css">
 </head>
@@ -18,11 +18,11 @@
 		<div id="wrapper">
 			<div id="content">
 				<div id="site-introduction">
-					<img id="profile" src="${pageContext.request.contextPath }${site.profile }" style="width:200px">
-					<h2>${site.welcome }</h2>
+					<img id="profile" src="${pageContext.request.contextPath }${sitevo.profile }" style="width:200px">
+					<h2>${sitevo.welcome }</h2>
 					<p>
 						
-						${fn:replace(site.description, newline,"<br>") }
+						${fn:replace(sitevo.description, newline,"<br>") }
 						<br><br>
 						<a href="${pageContext.request.contextPath }/guestbook?a=List">방명록</a>에 글 남기기<br>
 					</p>
