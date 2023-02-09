@@ -23,7 +23,7 @@
                id="join-form" 
                name="joinForm" 
                method="post"
-               action="${pageContext.request.contextPath }/user/auth">
+               action="${pageContext.request.contextPath }/user/join">
                
                <label class="block-label" for="name">이름</label>
                <form:input path="name"/>
