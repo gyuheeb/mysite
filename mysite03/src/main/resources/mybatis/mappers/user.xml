@@ -9,36 +9,6 @@
 	]]>
 	</insert>
 	
-	<select id="findByEmailAndPassword" resultType="uservo" parameterType="map">
-	<![CDATA[
-		select no, name,role from user where email= #{e } and password = password(#{p })
-	]]>
-	</select>	
-	
-	<select id="findByNo" resultType="uservo" parameterType="Long">
-	<![CDATA[
-		select no,name,email,password,gender from user where no = #{no }
-	]]>
-	</select>	
-	
-	<update id="update" parameterType="uservo">
-		<choose>
-			<when test='password == ""'>
-				<![CDATA[
-				update user
-				   set name=#{name }, gender=#{gender }
-				 where no=#{no }
-				]]>	
-			</when>
-			<otherwise>
-				<![CDATA[
-				update user
-				   set name=#{name }, gender=#{gender }, password=password(#{password })
-				 where no=#{no }
-				]]>	
-			</otherwise>
-		</choose>
-	</update>
 
 	
 </mapper>
