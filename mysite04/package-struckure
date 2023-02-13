@@ -9,6 +9,8 @@
 	 |		|		|		|     |--- DBConfig.java
 	 |		|		|		|     |--- MyBatisConfig.java
 	 |		|		|		|--- web
+	 |		|		|		|	  |--MvcConfig.java
+	 |		|		|		|	  |--SecurityConfig.java
 	 |		|		|--- controller
 	 |		|		|--- service
 	 |		|		|--- repository
