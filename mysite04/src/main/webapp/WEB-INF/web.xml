@@ -2,9 +2,13 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>mysite04</display-name>
  
-<context-param>
+	<context-param>
+	     <param-name>contextClass</param-name>
+	     <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+	</context-param> 	
+	<context-param>
 	     <param-name>contextConfigLocation</param-name>
-	     <param-value>classpath:applicationContext.xml</param-value>
+	     <param-value>com.douzone.mysite.config.AppConfig</param-value>
 	</context-param> 	
 	  
   	<!--  context Load Listener -->
@@ -20,15 +24,11 @@
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
-
-
 	</filter>
-
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-  
   
      <!-- Dispatcher Servlet -->
 	<servlet>
@@ -38,6 +38,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring-servlet.xml</param-value>
 		</init-param>
+		
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
