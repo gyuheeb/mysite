@@ -9,8 +9,10 @@
 	 |		|		|		|     |--- DBConfig.java
 	 |		|		|		|     |--- MyBatisConfig.java
 	 |		|		|		|--- web
-	 |		|		|		|	  |--MvcConfig.java
-	 |		|		|		|	  |--SecurityConfig.java
+	 |		|		|		|     |--- MvcConfig.java
+	 |		|		|		|     |--- SecurityConfig.java
+	 |		|		|		|     |--- MessageResourceConfig.java
+	 |		|		|		|     |--- FileuploadConfig.java
 	 |		|		|--- controller
 	 |		|		|--- service
 	 |		|		|--- repository
@@ -19,15 +21,18 @@
 	com
 	 |--- douzone
 	 |		|--- mysite
-	 |		|		|---  app
-	 |		|		|       |--- jdbc.properites
-	 |		|		|       |--- mybatis
-	 |		|		|		        |--- configuration.xml
-	 |		|		|		        |--- mappers
-	 |		|		|				|       |--- board.xml
-	 |		|		|		 		|       |--- user.xml
-	 |		|		|---  web	 
-	 |		|		|       |--- messages 
-	 |		|		|       |        |---messages_ko.properties	 
-	 |		|		|       |        |---messages_en.properties	 
+	 |		|		|--- app
+	 |		|		|	  |--- jdbc.properties
+	 |		|		|	  |--- mybatis
+	 |		|		|	  		|--- configuration.xml
+	 |		|		|	  		|--- mappers
+	 |		|		|	  		|		|--- board.xml
+	 |		|		|	  		|		|--- user.xml
+	 |		|		|--- web
+	 |		|		|	  |--- messages
+	 |		|		|	  |       |--- messages_ko.properties
+	 |		|		|	  |       |--- messages_en.properties
+	 
+	 
+	 
 	 		
