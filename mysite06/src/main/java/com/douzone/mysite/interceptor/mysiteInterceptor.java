@@ -22,7 +22,7 @@ public class mysiteInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		SiteVo siteVo = siteService.getSite();
-		servletContext.setAttribute("siteVo", siteVo);
+		servletContext.setAttribute("sitevo", siteVo);
 		
 //		SiteVo siteVo = (SiteVo)request.getServletContext().getAttribute("sitevo");
 //		if(siteVo == null) {
