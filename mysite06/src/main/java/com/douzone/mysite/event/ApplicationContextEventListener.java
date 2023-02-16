@@ -8,12 +8,13 @@ import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.douzone.mysite.service.SiteService;
 import com.douzone.mysite.vo.SiteVo;
 
-
+@Component
 public class ApplicationContextEventListener {	
 	@Autowired
 	private ApplicationContext applicationContext;
