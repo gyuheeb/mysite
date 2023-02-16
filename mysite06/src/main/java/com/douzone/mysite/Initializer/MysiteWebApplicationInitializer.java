@@ -7,7 +7,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.FrameworkServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import com.douzone.mysite.config.AppConfig;
-import com.douzone.mysite.config.WebConfig;
+import com.douzone.mysite.config.web.WebConfig;
 
 public class MysiteWebApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
