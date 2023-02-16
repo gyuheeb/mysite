@@ -22,8 +22,7 @@ public class GlobalExceptionHandler {
 			mav.setViewName("error/404");
 			return mav;
 		}
-		
-		
+	
 		//2.로깅(Logging)
 		StringWriter errors= new StringWriter(); //타겟이 string 개체안에 이는 buffer
 		e.printStackTrace(new PrintWriter(errors));
