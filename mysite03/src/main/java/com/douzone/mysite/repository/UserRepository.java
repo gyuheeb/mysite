@@ -31,6 +31,10 @@ public class UserRepository {
 	public UserVo findByNo(Long no) {
 		return	sqlSession.selectOne("user.findByNo",no);	
 	}
+	// email 중복체크
+	public UserVo findByEmail(String email) {
+		return sqlSession.selectOne("user.findByEmail", email);
+	}
 
 	// 회원정보 수정 Update
 	public void update(UserVo vo) {

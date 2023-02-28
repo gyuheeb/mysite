@@ -19,7 +19,7 @@ import com.douzone.mysite.interceptor.mysiteInterceptor;
 @Configuration
 @EnableAspectJAutoProxy
 @ComponentScan({"com.douzone.mysite.controller"})
-@Import({MvcConfig.class, SecurityConfig.class,MessageSourceConfig.class,FileuploadConfig.class})
+@Import({SecurityConfig.class,MessageSourceConfig.class,FileuploadConfig.class})
 public class WebConfig implements WebMvcConfigurer {
 	// Site Inteceptor
 	@Bean
