@@ -16,12 +16,12 @@
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script>
 var messageBox = function(title, message, callback){
-	$("#dialog-message p").textmessage);
+	$("#dialog-message p").text(message);
 	$("#dialog-message").attr("title",title).dialog({
 		width: 340,
 		height:170,
 		modal: true,
-		button:{
+		buttons:{
 			"확인": function(){
 				$(this).dialog('close');
 				//this = #dialog-message
