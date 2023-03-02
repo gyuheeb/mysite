@@ -27,10 +27,10 @@ public class GuestbookRepository {
 	}
 	
 	//DELETE
-	public void deleteByGuest(Long no,String password) {
+	public int deleteByGuest(Long no,String password) {
 		
 		Map<String, Object> map = Map.of("no",no,"password",password);
-		sqlSession.delete("guestbook.deleteByGuest",map);
+		 return sqlSession.delete("guestbook.deleteByGuest",map);
 		
 	}
 	
