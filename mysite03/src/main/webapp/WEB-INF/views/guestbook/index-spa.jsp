@@ -12,39 +12,18 @@
 <script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-var render = function(vo,mode){
-	var htmls =	"<li data-no=''>"+
+var render = function(vo ,mode){
+	var htmls =	"<li data-no='"+vo.no+"'>"+
 	"<strong>"+vo.name+"</strong>"+
 	"<p>"+vo.message+"</p>" +"<strong></strong>"
-	+"<a href='' data-no=''>삭제</a> "+
+	+"<a href='' data-no='"+vo.no+"'>삭제</a> "+
 		"</li>";
 		
 		
 		$("#list-guestbook")[mode ? "prepend":"append"](htmls);
 		
 }
-	var fetch = function() {
 	
-	$.ajax({
-		url: "${pageContext.request.contextPath}/guestbook/api",
-		type: "get",
-		dataType: "json",
-		success: function(response) { 
-			if(response.result === 'fail') {
-				console.error(response.message);
-				return;
-			}
-			
-			response.data.forEach(function(vo){
-				render(vo);
-			
-			});
-			
-			}
-		});
-
-	}
-
 //add	
 $(function(){  
 	$("#add-form").submit(function(){
@@ -67,62 +46,93 @@ $(function(){
 					return;
 				}
 				
-				render(response.data);
+				render(response.data,true);
 			}
 		});
+		
 	});
-		fetch();
-		
-		$(function(){
-		
-			var $dialogDelete = $("#dialog-delete-form").dialog({
-				autoOpen:false,
-				modal:true,
-				buttons:{
-					
-					"삭제":function(){
-						var no = $("#hidden-no").val();
-						var password = $("#password-delete").val();
-
-						console.log("ajax 삭제하기");
-						console.log(no);
-						
-					$.ajax({
-							url: "${pageContext.request.contextPath}/guestbook/api/"+no,
-							async: true,
-							type: 'delete',
-							dataType: 'json',
-							data: 'password=' + password,
-							success: function(response) { 
-								if(response.result != 'fail') {
-									return;
-								}
-								response.data.forEach(function(vo){
-									render(vo);
-								})
-								
-								}
-							});
-						
-					},
-					
-					
-					
-					
-					"취소":function(){
-						console.log("삭제 다이알로그의 폼 데이터 리셋하기");
-						$(this).dialog('close');
-					}
-				}
+});
+var fetch = function() {
+	
+	$.ajax({
+		url: "${pageContext.request.contextPath}/guestbook/api",
+		type: "get",
+		dataType: "json",
+		success: function(response) { 
+			if(response.result === 'fail') {
+				console.error(response.message);
+				return;
+			}
+			
+			response.data.forEach(function(vo){
+				render(vo,false);
+			
 			});
 			
-			$(document).on('click',"#list-guestbook li", function(event){
-				event.preventDefault();
-				$("#hidden-no").val($(this).data("no"));
-				$dialogDelete.dialog('open');
+			}
 		});
-		});
-});
+
+	}
+$(function(){
+	   // 삭제 다이알로그 jQuery 객체 만들기
+	   var dialogDelete = $("#dialog-delete-form").dialog({
+	      autoOpen: false,
+	      modal: true,
+	      buttons:{
+	         "삭제": function(){
+	            var no = $("#hidden-no").val();
+	            console.log(no);
+	            var password = $("#password-delete").val();
+	            $.ajax({
+	               url: '${pageContext.request.contextPath }/guestbook/api/' + no,
+	               async: true,
+	               type: 'delete',
+	               dataType: 'json',
+	               data: 'password=' + password,
+	               success: function(response){
+	                  if(response.result != "success"){
+	                     console.error(response.message);
+	                     return;
+	                  }
+	                  if(response.data != -1){
+	                     $("#list-guestbook li[data-no=" + response.data + "]").remove();
+	                     dialogDelete.dialog('close');
+	                     return;
+	                  }
+	                  // 비밀번호가 틀린경우
+	                  $("#dialog-delete-form p.validateTips.error").show();
+	               },
+	               error: function(xhr, status, e){
+	                  console.error(status + ":" + e);
+	               }
+	            });
+	         },
+	         "취소": function(){
+	            $(this).dialog('close');
+	         }
+	      },
+	      close: function(){
+	         $("#hidden-no").val("");
+	         $("#password-delete").val("");
+	         $("#dialog-delete-form p.validateTips.error").hide();
+	      }
+	   });
+	   
+	
+	   
+	   $(document).on('click', '#list-guestbook li a', function(event){
+	      event.preventDefault();
+	     
+	      var no = $(this).attr('data-no');
+	      console.log(no);
+	      $("#hidden-no").val(no);
+	      dialogDelete.dialog("open");
+	   });
+
+	   //최초 리스트 가져오기
+	   fetch();
+	})
+
 
 </script>
 </head>
