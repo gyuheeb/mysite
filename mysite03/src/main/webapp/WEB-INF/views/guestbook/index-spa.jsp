@@ -10,17 +10,26 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/assets/css/guestbook-css.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/ejs/ejs.js"></script>
+<script  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+var startNo =0;
+var isEnd =false;
+var listItemTemplate = new EJS({
+	url: "${pageContext.request.contextPath }/assets/js/ejs/list-item-template.ejs"
+});
+var listTemplate = new EJS({
+	url: "${pageContext.request.contextPath }/assets/js/ejs/list-item-template.ejs"
+});
 var render = function(vo ,mode){
-	var htmls =	"<li data-no='"+vo.no+"'>"+
+/*	var htmls =	"<li data-no='"+vo.no+"'>"+
 	"<strong>"+vo.name+"</strong>"+
 	"<p>"+vo.message+"</p>" +"<strong></strong>"
 	+"<a href='' data-no='"+vo.no+"'>삭제</a> "+
 		"</li>";
-		
-		
-		$("#list-guestbook")[mode ? "prepend":"append"](htmls);
+*/
+	var htmls = listItemTemplate.render(vo);
+	$("#list-guestbook").prepend(htmls);
 		
 }
 	
@@ -52,6 +61,7 @@ $(function(){
 		
 	});
 });
+//fetch
 var fetch = function() {
 	
 	$.ajax({
@@ -73,8 +83,8 @@ var fetch = function() {
 		});
 
 	}
+// 삭제
 $(function(){
-	   // 삭제 다이알로그 jQuery 객체 만들기
 	   var dialogDelete = $("#dialog-delete-form").dialog({
 	      autoOpen: false,
 	      modal: true,
@@ -111,7 +121,7 @@ $(function(){
 	            $(this).dialog('close');
 	         }
 	      },
-	      close: function(){
+	      close: function(){ 			/*close reset*/
 	         $("#hidden-no").val("");
 	         $("#password-delete").val("");
 	         $("#dialog-delete-form p.validateTips.error").hide();
