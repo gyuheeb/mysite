@@ -38,11 +38,11 @@ export default function Guestbook() {
             setMessages(messages.filter((message) => message.no != no));
         },
         add: async function (message) {
-            const response = await fetch('/api/guestbook', {
+            const response = await fetch(`/api/guestbook`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'applcation/json'
+                    'Accept': 'application/json'
                 },
                 body: JSON.stringify(message)
             });
@@ -69,11 +69,10 @@ export default function Guestbook() {
         const messagesInState = this ? messagesRef.current : messages;
         const startNo = messagesInState.length === 0 ? 0 : messagesInState[messagesInState.length - 1].no;
         try {
-            const response = await fetch(`/api/guestbook/${startNo}`, {
+            const response = await fetch(`/api/guestbook?no=${startNo}`, {
                 method: 'get',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'applcation/json'
+                    'Accept': 'application/json'
                 }
             });
 
