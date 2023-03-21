@@ -8,12 +8,13 @@ import Guestbook from './component/guestbook';
 import SignIn from './component/user/SignIn';
 import SignUp from './component/user/SignUp';
 import Settings from './component/user/Settings';
+import Error404 from './component/error/Error404';
 
 
 export default function App() {
     return (
         <Router>
-            <Routers>
+            <Routes>
             <Route path={'/'} element={<Main />}/>
             <Route path={'gallery'} element={<Gallery />}/>
             <Route path={'guestbook'} element={<Guestbook />}/>
@@ -21,7 +22,7 @@ export default function App() {
             <Route path={'signup'} element={<SignUp />}/>
             <Route path={'settings'} element={<Settings />}/>
             <Route path={'*'} element={<Error404 />}/>
-            </Routers>
+            </Routes>
        </Router>
     )
 }
