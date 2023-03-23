@@ -30,7 +30,7 @@ export default function MessageList({messages, notifyMessage}) {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
-                body: JSON.stringify({password: e.target.password.value})
+                body: e.target.password.value
             });
 
             if (!response.ok) {

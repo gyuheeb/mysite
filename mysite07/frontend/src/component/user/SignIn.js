@@ -5,7 +5,7 @@ import styles from '../../assets/scss/component/user/User.scss';
 export default function SignIn() {
     return (
         <MySiteLayout>
-            <div className={styles.User}>
+            <div className={styles.user}>
                 <h2>Sign In</h2>
             </div>
         </MySiteLayout>
